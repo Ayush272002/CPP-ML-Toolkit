@@ -13,23 +13,15 @@ LinearRegression::LinearRegression()
 LinearRegression::LinearRegression(bool fit_intercept_, double lr, int epochs_)
     : learning_rate(0.0), epochs(0), fit_intercept(false), lambda(0.0), reg_type("none"), bias(0.0)
 {
-    spdlog::info("LinearRegression(bool, double, int) constructor body entered");
-    spdlog::info("About to assign learning_rate");
     learning_rate = lr;
-    spdlog::info("learning_rate assigned: {}", learning_rate);
-    spdlog::info("About to assign epochs");
     epochs = epochs_;
-    spdlog::info("epochs assigned: {}", epochs);
-    spdlog::info("About to assign fit_intercept");
     fit_intercept = fit_intercept_;
-    spdlog::info("fit_intercept assigned: {}", fit_intercept);
     lambda = 0.0;
     reg_type = "none";
     bias = 0.0;
-    // Ensure Eigen objects are initialized to safe defaults
+
     weights = Eigen::VectorXd();
     loss_history.clear();
-    spdlog::info("LinearRegression(bool, double, int) constructor finished");
 }
 
 LinearRegression::~LinearRegression() {}
