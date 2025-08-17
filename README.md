@@ -30,7 +30,11 @@ ml-algo/
 ```
 
 ## Getting Started
-1. **Clone the repository**
+1. **Clone the repository**:
+    ```bash
+    git clone https://github.com/Ayush272002/CPP-ML-Toolkit.git
+    ```
+
 2. **Install Python dependencies** (in your venv):
    ```bash
    pip install -r requirements.txt
