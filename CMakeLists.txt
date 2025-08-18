@@ -37,3 +37,10 @@ pybind11_add_module(linear_regression_cpp
     src/bindings.cpp
     src/LinearRegression.cpp
 )
+target_compile_definitions(linear_regression_cpp PRIVATE BUILD_LINEAR_REGRESSION)
+
+pybind11_add_module(logistic_regression_cpp
+    src/bindings.cpp
+    src/LogisticRegression.cpp
+)
+target_compile_definitions(logistic_regression_cpp PRIVATE BUILD_LOGISTIC_REGRESSION)
