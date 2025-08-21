@@ -1,5 +1,4 @@
-#ifndef LINEAR_REGRESSION_HPP
-#define LINEAR_REGRESSION_HPP
+#pragma once
 
 #include <Eigen/Dense>
 #include <vector>
@@ -63,5 +62,3 @@ public:
                    int batch_size,
                    bool verbose = false);
 };
-
-#endif

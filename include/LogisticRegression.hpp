@@ -1,5 +1,4 @@
-#ifndef LOGISTIC_REGRESSION_HPP
-#define LOGISTIC_REGRESSION_HPP
+#pragma once
 
 #include <Eigen/Dense>
 #include <vector>
@@ -92,5 +91,3 @@ public:
     // Compute Binary Cross-Entropy Loss
     double compute_loss(const Eigen::MatrixXd &X, const Eigen::VectorXd &y) const;
 };
-
-#endif
