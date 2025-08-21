@@ -1,20 +1,24 @@
 import os
+import sys
 import numpy as np
-import pandas as pd
-import logistic_regression_cpp  
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score, roc_auc_score
 from sklearn.linear_model import LogisticRegression as SklearnLogisticRegression
+from sklearn.datasets import load_breast_cancer
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-DATA_PATH = os.path.join(SCRIPT_DIR, '..', 'data', 'creditcard.csv')
+BUILD_DIR = os.path.join(SCRIPT_DIR, '..', 'build')
+sys.path.insert(0, BUILD_DIR)
+
+import logistic_regression_cpp  
+
 IMAGES_DIR = os.path.join(SCRIPT_DIR, '..', 'images', 'logistic_regression')
 os.makedirs(IMAGES_DIR, exist_ok=True)
-df = pd.read_csv(DATA_PATH)
 
-# Credit card dataset: 'Time', 'V1'...'V28', 'Amount', 'Class'
-X = df.drop("Class", axis=1).values.astype(float)
-y = df["Class"].values.astype(float)
+# breast cancer dataset
+data = load_breast_cancer()
+X = data.data.astype(float)
+y = data.target.astype(float)
 
 # Standardize features
 X = (X - X.mean(axis=0)) / X.std(axis=0)
@@ -56,7 +60,6 @@ plt.ylabel("Binary Cross-Entropy Loss")
 plt.title("Training Loss Curve")
 plt.savefig(os.path.join(IMAGES_DIR, "loss_curve.png"))
 
-# Predictions vs Actual (C++ vs scikit-learn) - Probability comparison
 plt.figure()
 plt.scatter(y_vec, y_prob_cpp, label="C++ Predicted", alpha=0.6)
 plt.scatter(y_vec, y_prob_sk, label="sklearn Predicted", alpha=0.6)
@@ -65,10 +68,3 @@ plt.ylabel("Predicted Probability")
 plt.title("Predictions vs Actual (C++ vs scikit-learn)")
 plt.legend()
 plt.savefig(os.path.join(IMAGES_DIR, "pred_vs_actual_comparison.png"))
-
-plt.figure()
-plt.plot(model.get_loss_history())
-plt.xlabel("Epochs")
-plt.ylabel("Binary Cross-Entropy Loss")
-plt.title("Training Loss Curve")
-plt.savefig(os.path.join(IMAGES_DIR, "loss_curve.png"))

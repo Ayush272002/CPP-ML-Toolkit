@@ -1,10 +1,16 @@
 import os
+import sys
 import numpy as np
-import pandas as pd
-import linear_regression_cpp  
+import pandas as pd 
 import matplotlib.pyplot as plt
 from sklearn.metrics import mean_squared_error
 from sklearn.linear_model import LinearRegression as SklearnLinearRegression
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+BUILD_DIR = os.path.join(SCRIPT_DIR, '..', 'build')
+sys.path.insert(0, BUILD_DIR)
+
+import linear_regression_cpp 
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_PATH = os.path.join(SCRIPT_DIR, '..', 'data', 'housing.csv')
