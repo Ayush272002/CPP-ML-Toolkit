@@ -1,9 +1,10 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/eigen.h>
 #include <pybind11/stl.h>
+#include <spdlog/spdlog.h>
 #include "LinearRegression.hpp"
 #include "LogisticRegression.hpp"
-#include <spdlog/spdlog.h>
+#include "KNN.hpp"
 
 namespace py = pybind11;
 
@@ -68,5 +69,42 @@ PYBIND11_MODULE(logistic_regression_cpp, m)
       .def("set_fit_intercept", &LogisticRegression::set_fit_intercept)
       .def("set_regularization", &LogisticRegression::set_regularization)
       .def("compute_loss", &LogisticRegression::compute_loss);
+}
+#endif
+
+#ifdef BUILD_KNN
+PYBIND11_MODULE(knn_cpp, m)
+{
+  spdlog::info("PYBIND11_MODULE knn_cpp entered");
+
+  py::enum_<DistanceMetric>(m, "DistanceMetric")
+    .value("EUCLIDEAN", DistanceMetric::EUCLIDEAN)
+    .value("MANHATTAN", DistanceMetric::MANHATTAN)
+    .value("MINKOWSKI", DistanceMetric::MINKOWSKI)
+    .export_values();
+
+  py::enum_<KNNType>(m, "KNNType")
+    .value("Classification", KNNType::Classification)
+    .value("Regression", KNNType::Regression)
+    .export_values();
+
+  py::class_<KNN>(m, "KNN")
+    .def(py::init<>())
+    .def(py::init<int, KNNType, DistanceMetric, double>(),
+       py::arg("k") = 3,
+       py::arg("knn_type") = KNNType::Classification,
+       py::arg("metric") = DistanceMetric::EUCLIDEAN,
+       py::arg("p") = 2.0)
+    .def("fit", &KNN::fit, py::arg("X"), py::arg("y"))
+    .def("predict", py::overload_cast<const Eigen::VectorXd &>(&KNN::predict, py::const_), py::arg("x"))
+    .def("predict", py::overload_cast<const Eigen::MatrixXd &>(&KNN::predict, py::const_), py::arg("X"))
+    .def("get_k", &KNN::get_k)
+    .def("set_k", &KNN::set_k)
+    .def("get_knn_type", &KNN::get_knn_type)
+    .def("set_knn_type", &KNN::set_knn_type)
+    .def("get_distance_metric", &KNN::get_distance_metric)
+    .def("set_distance_metric", &KNN::set_distance_metric)
+    .def("get_minkowski_p", &KNN::get_minkowski_p)
+    .def("set_minkowski_p", &KNN::set_minkowski_p);
 }
 #endif

@@ -44,3 +44,9 @@ pybind11_add_module(logistic_regression_cpp
     src/LogisticRegression.cpp
 )
 target_compile_definitions(logistic_regression_cpp PRIVATE BUILD_LOGISTIC_REGRESSION)
+
+pybind11_add_module(knn_cpp
+    src/bindings.cpp
+    src/KNN.cpp
+)
+target_compile_definitions(knn_cpp PRIVATE BUILD_KNN)

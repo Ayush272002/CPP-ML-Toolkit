@@ -18,6 +18,8 @@ This project is a collection of machine learning algorithms implemented in C++ w
 ## Currently Implemented Algorithms
 - **Linear Regression** — Full-batch and mini-batch gradient descent with regularization
 - **Logistic Regression** — Binary classification with L1/L2 regularization support
+- **K-Nearest Neighbors (KNN)** — Supports both classification and regression, multiple distance metrics (Euclidean, Manhattan, Minkowski)
+
 
 ## Directory Structure
 ```
@@ -42,9 +44,14 @@ The test scripts generate detailed performance comparisons with scikit-learn:
 - **Visualizations**: Loss curve during training, Predictions vs Actual scatter plot
 
 ### Logistic Regression  
-- **Dataset**: Credit Card Fraud Detection (highly imbalanced)
+- **Dataset**: Breast Cancer (highly imbalanced)
 - **Metrics**: Accuracy and AUC (Area Under ROC Curve)
 - **Visualizations**: Loss curve during training, Predicted probabilities comparison
+
+### K-Nearest Neighbors (KNN)
+- **Datasets**: Wine Quality
+- **Metrics**: Accuracy, Mean Squared Error (MSE)
+- **Visualizations**: Accuracy vs. k plot, Predictions vs Actual scatter plot
 
 
 ## Getting Started
