@@ -30,7 +30,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include_directories(include ${eigen_SOURCE_DIR} ${spdlog_SOURCE_DIR}/include)
 
 # pybind11 from the venv
-set(pybind11_DIR "${CMAKE_SOURCE_DIR}/venv/lib/python3.10/site-packages/pybind11/share/cmake/pybind11")
+set(pybind11_DIR "${CMAKE_SOURCE_DIR}/venv/lib/python3.11/site-packages/pybind11/share/cmake/pybind11")
 find_package(pybind11 REQUIRED)
 
 pybind11_add_module(linear_regression_cpp
