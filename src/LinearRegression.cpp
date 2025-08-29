@@ -3,6 +3,7 @@
 #include <cmath>
 #include <spdlog/spdlog.h>
 #include <algorithm>
+#include <random>  
 
 // ----------------------------
 // Constructors & Destructor
@@ -129,7 +130,9 @@ void LinearRegression::gradient_descent_batch(const Eigen::MatrixXd &X, const Ei
         for (int j = 0; j < n_samples; ++j)
             indices[j] = j;
 
-        std::random_shuffle(indices.begin(), indices.end());
+        std::random_device rd;
+        std::mt19937 g(rd());
+        std::shuffle(indices.begin(), indices.end(), g);
 
         for (int start = 0; start < n_samples; start += batch_size)
         {
